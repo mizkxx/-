@@ -1,50 +1,38 @@
-<%= render 'post_books/list', post_books: @post_books %>
-
-
-<div class="profile-container">
-    <h3 class="profile-name"><%= @user.name %></h3>
-    <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
-     <%= attachment_introduction_tag @user, :profile_introduction %>
-	<% if @user.id == current_user.id %>
-        <p><%= link_to "プロフィール編集", edit_user_path(@user), class: "pull-right" %></p>
-    <% end %>
-</div>
-
-<section class="sct-color-1 slice">
-  <div class="container-fluid masonry-container">
-    <div class="row">
-      <div class="col-md-8 col-sm-offset-2">
-        <div class="masonry-wrapper-cols">
-<section class="sct-color-1 slice">
-  <div class="container-fluid masonry-container">
-    <div class="row">
-      <div class="col-md-8 col-sm-offset-2">
-        <div class="masonry-wrapper-cols">
-
-
-<table>
-	<thead>
-		<tr>
-			<th>title</th>
-			<th>body</th>
-			<th></th>
-		</tr>
-	</thead>
-
-	<tbody>
-		<% @post_books.each do |post_book| %>
-			<tr>
-				<td><%= book.title %></td>
-				<td><%= book.body %></td>
-     	<td><%= link_to 'Show', book, class:'show_#{book.id}' %></td>
-        <td><%= link_to 'Edit', book_path(book), class:'edit_#{book.id}' %></td>
-        <td><%= link_to 'Destroy', book, class:'destroy_#{book.id}', method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-		<% end %>
-	</tbody>
-</table>
-        </div>
+<div class="row">
+  <aside class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @user.name %></h3>
+      </div>
+      <div class="panel-body al-c">
+          <% if @user.image? %>
+            <%= image_tag @user.profile_image, :class => "mw50" %>
+          <% else %>
+            <%= image_tag("/images/icon/icon-mama-02-160px.png") %>
+          <% end %>
       </div>
     </div>
+  </aside>
+  <div class="col-md-8">
+  <p><span class="orange b"><%= @user.name %></span>
+  <p class="orange b">自己紹介</p>
+  <p><%= @user.profile_introduction %></p>
   </div>
-</section>
+</div>
+
+<h3>New book</h3>
+<!-- form_for部分 -->
+<%= form_for(@book) do |f| %>
+
+<h4>Title</h4>
+<%= f.text_field :title, class: "book_title" %>
+
+<h4>Opnion</h4>
+<%= f.text_area :body, class: "book_body" %>
+
+<br><%= f.submit 'Create Book' %></br>
+
+<% end %>
+
+<% その人の投稿だけ並んでる状態にする %>
+

@@ -17,10 +17,7 @@
                           </div>
                       </div>
 
-
-<h2>Log in</h2>
-
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-group has-icon">
       <label class="control-label sr-only" for="inputEmail">Email</label>
       <%= f.email_field :email, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"メールアドレス"%>
@@ -34,7 +31,7 @@
     <%= f.submit "サインイン", class:"btn btn-lg btn-block btn-base-1 mt-20" %>
   <% end %> 
 
-</div>
+                    </div>
                 </div>
             </div>
         </div>
